@@ -3,43 +3,88 @@ const clpFormat = new Intl.NumberFormat('es-CL', {
     currency: 'CLP',
 });
 
-const favoriteStorage = localStorage.getItem('favorites');
-
 let products = [];
 let favorites = [];
 
+const favoriteStorage = localStorage.getItem('favorites');
 if (favoriteStorage) {
     favorites = JSON.parse(favoriteStorage);
 }
 
-function addToFavorites(productId) {
-    const product = products.find(product => product.id === productId);
-    favorites.push(product);
+function saveFavorites() {
+    localStorage.setItem('favorites', JSON.stringify(favorites));
 }
 
-function removeFromFavorites(productId) {
-    const product = favorites.find(product => product.id === productId);
-    favorites = favorites.filter(product => product.id !== productId);
+function renderFavorites() {
+    const container = $('#favorites-list');
+    
+    container.empty();
+
+    if (favorites.length === 0) {
+        container.html('<p class="text-center my-4 text-muted">No hay favoritos 😔</p>');
+        return;
+    }
+
+    $.each(favorites, function(index, product) {
+        const favoriteCard = $('<li>').addClass('list-group-item d-flex justify-content-start align-items-center gap-2');
+        
+        favoriteCard.html(`
+            <button class="btn btn-danger btn-delete-favorite" data-id="${product.id}">
+                X
+            </button>
+            <span>${product.name}</span>
+        `);
+        container.append(favoriteCard);
+    });
+}
+
+function renderProducts() {
+    const container = $('#products');
+    
+    container.empty();
+
+    $.each(products, function(index, product) {
+        const isFavorite = favorites.some(fav => fav.id === product.id);
+        
+        const btnClass = isFavorite ? 'btn-danger' : 'btn-outline-danger';
+        const btnText = isFavorite ? 'Quitar de favoritos' : 'Agregar a favoritos';
+
+        const productCard = $('<div>').addClass('card-group col-12 col-md-4 col-lg-3 mb-4');
+        
+        productCard.html(`
+            <div class="card h-100">
+                <img src="${product.image.src}" class="card-img-top" alt="${product.name}" style="object-fit: contain; height: 250px;">
+                <div class="card-body">
+                    <h5 class="card-title">${product.name}</h5>
+                    <p class="card-text">${product.description}</p>
+                </div>
+                <div class="card-footer bg-white d-flex justify-content-between align-items-center">
+                    <span class="text-dark fw-bold">${clpFormat.format(product.price)}</span>
+                    
+                    <button class="btn ${btnClass} btn-favorite" data-id="${product.id}">
+                        ${btnText}
+                    </button>
+                </div>
+            </div>
+        `);
+        container.append(productCard);
+    });
 }
 
 $.getJSON('db/products.json', function(data) {
     products = data;
-
     const carouselInner = $('#carousel-inner');
+    let carouselData = [...data]; 
     
-    for (let i = data.length - 1; i > 0; i--) {
+    for (let i = carouselData.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [data[i], data[j]] = [data[j], data[i]];
+        [carouselData[i], carouselData[j]] = [carouselData[j], carouselData[i]];
     }
 
-    const randomProducts = data.slice(0, 3);
-
+    const randomProducts = carouselData.slice(0, 3);
     $.each(randomProducts, function(index, product) {
         const carouselItem = $('<div>').addClass('carousel-item');
-
-        if(index === 0) {
-            carouselItem.addClass('active');
-        }
+        if(index === 0) carouselItem.addClass('active');
 
         carouselItem.html(`
             <img src="${product.image.banner}" class="d-block w-100" alt="${product.name}">
@@ -51,23 +96,44 @@ $.getJSON('db/products.json', function(data) {
         carouselInner.append(carouselItem);
     });
 
-    $.each(data, function(index, product) {
-        const productCard = $('<div>').addClass('card-group col-12 col-md-4 col-lg-4 mb-4');
-        const isFavorite = favorites.some(favorite => favorite.id === product.id);
-        
-        productCard.html(`
-            <div class="card">
-                <img src="${product.image.src}" width="250" height="250" class="card-img-top" alt="${product.name}">
-                <div class="card-body">
-                    <h5 class="card-title">${product.name}</h5>
-                    <p class="card-text">${product.description}</p>
-                </div>
-                <div class="card-footer bg-white d-flex justify-content-between">
-                    <span class="text-dark">${clpFormat.format(product.price)}</span>
-                    <button class="btn btn-outline-danger" onclick="${isFavorite ? removeFromFavorites(product.id) : addToFavorites(product.id)}">${isFavorite ? 'Quitar de favoritos' : 'Agregar a favoritos'}</button>
-                </div>
-            </div>
-        `);
-        $('#products').append(productCard);
-    });
+    renderProducts();
+});
+
+$(document).on('click', '.btn-favorite', function() {
+    const button = $(this);
+    const productId = button.data('id');
+    
+    const existingIndex = favorites.findIndex(fav => fav.id === productId);
+
+    if (existingIndex !== -1) {
+        favorites.splice(existingIndex, 1);
+    } else {
+        const productToAdd = products.find(p => p.id === productId);
+        if (productToAdd) {
+            favorites.push(productToAdd);
+        }
+    }
+
+    saveFavorites();
+    renderProducts();
+});
+
+$(document).on('click', '.btn-delete-favorite', function() {
+    const button = $(this);
+    const productId = button.data('id');
+    
+    const existingIndex = favorites.findIndex(fav => fav.id === productId);
+
+    if (existingIndex !== -1) {
+        favorites.splice(existingIndex, 1);
+    }
+
+    saveFavorites();
+    renderFavorites();
+    renderProducts();
+});
+
+$('#btn-favorites').on('click', function() {
+    $('#favoritesModal').modal('show');
+    renderFavorites();
 });
