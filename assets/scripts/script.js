@@ -107,11 +107,25 @@ $(document).on('click', '.btn-favorite', function() {
 
     if (existingIndex !== -1) {
         favorites.splice(existingIndex, 1);
+
+        Swal.fire({
+            icon: 'success',
+            title: 'Producto removido de favoritos',
+            showConfirmButton: false,
+            timer: 1500
+        });
     } else {
         const productToAdd = products.find(p => p.id === productId);
         if (productToAdd) {
             favorites.push(productToAdd);
         }
+
+        Swal.fire({
+            icon: 'success',
+            title: 'Producto agregado a favoritos',
+            showConfirmButton: false,
+            timer: 1500
+        });
     }
 
     saveFavorites();
