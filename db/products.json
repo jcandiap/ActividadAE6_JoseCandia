@@ -1,0 +1,123 @@
+[
+    {
+        "id": 1,
+        "name": "Notebook Lenovo",
+        "price": 900000,
+        "description": "Notebook Lenovo con procesador Intel Core i5 y 8GB de RAM.",
+        "image": {
+            "alt": "Notebook Lenovo",
+            "src": "assets/images/products/card/notebook-lenovo.webp",
+            "banner": "assets/images/products/banner/notebook-lenovo.png"
+        }
+    },
+    {
+        "id": 2,
+        "name": "Notebook HP",
+        "price": 850000,
+        "description": "Notebook HP con procesador Intel Core i7 y 16GB de RAM.",
+        "image": {
+            "alt": "Notebook HP",
+            "src": "assets/images/products/card/notebook-hp.jpg",
+            "banner": "assets/images/products/banner/notebook-hp.webp"
+        }
+    },
+    {
+        "id": 3,
+        "name": "Notebook Acer",
+        "price": 750000,
+        "description": "Notebook Acer con procesador Intel Core i7 y 16GB de RAM.",
+        "image": {
+            "alt": "Notebook Acer",
+            "src": "assets/images/products/card/notebook-acer.webp",
+            "banner": "assets/images/products/banner/notebook-acer.jpg"
+        }
+    },
+    {
+        "id": 4,
+        "name": "Teclado Mecánico Logitech",
+        "price": 125000,
+        "description": "Teclado mecánico Logitech con switch Cherry MX Red.",
+        "image": {
+            "alt": "Teclado Mecánico Logitech",
+            "src": "assets/images/products/card/teclado-mecanico-logitech.webp",
+            "banner": "assets/images/products/banner/teclado-mecanico-logitech.jpg"
+        }
+    },
+    {
+        "id": 5,
+        "name": "Teclado Mecánico Corsair",
+        "price": 100000,
+        "description": "Teclado mecánico Corsair con switch Cherry MX Blue.",
+        "image": {
+            "alt": "Teclado Mecánico Corsair",
+            "src": "assets/images/products/card/teclado-mecanico-corsair.jpg",
+            "banner": "assets/images/products/banner/teclado-mecanico-corsair.webp"
+        }
+    },
+    {
+        "id": 6,
+        "name": "Teclado Mecánico Razer",
+        "price": 150000,
+        "description": "Teclado mecánico Razer con switch Cherry MX Brown.",
+        "image": {
+            "alt": "Teclado Mecánico Razer",
+            "src": "assets/images/products/card/teclado-mecanico-razer.webp",
+            "banner": "assets/images/products/banner/teclado-mecanico-razer.webp"
+        }
+    },
+    {
+        "id": 7,
+        "name": "Mouse gamer Logitech",
+        "price": 75000,
+        "description": "Mouse gamer Logitech con sensor óptico de 1600 DPI.",
+        "image": {
+            "alt": "Mouse gamer Logitech",
+            "src": "assets/images/products/card/mouse-logitech.webp",
+            "banner": "assets/images/products/banner/audifonos-logitech.jpg"
+        }
+    },
+    {
+        "id": 8,
+        "name": "Mouse gamer Corsair",
+        "price": 125000,
+        "description": "Mouse gamer Corsair con sensor óptico de 1600 DPI.",
+        "image": {
+            "alt": "Mouse gamer Corsair",
+            "src": "assets/images/products/card/mouse-corsair.webp",
+            "banner": "assets/images/products/banner/teclado-mecanico-corsair.webp"
+        }
+    },
+    {
+        "id": 8,
+        "name": "Audífonos gamer Logitech",
+        "price": 80000,
+        "description": "Audífonos gamer Logitech con cancelación de ruido.",
+        "image": {
+            "alt": "Audífonos gamer Logitech",
+            "src": "assets/images/products/card/audifonos-logitech.png",
+            "banner": "assets/images/products/banner/audifonos-logitech.jpg"
+        }
+    },
+    {
+        "id": 9,
+        "name": "Audífonos gamer Corsair",
+        "price": 125000,
+        "description": "Audífonos gamer Corsair con cancelación de ruido.",
+        "image": {
+            "alt": "Audífonos gamer Corsair",
+            "src": "assets/images/products/card/audifonos-corsair.avif",
+            "banner": "assets/images/products/banner/teclado-mecanico-corsair.webp"
+        }
+    },
+    {
+        "id": 10,
+        "name": "Pendrive Kingston 64GB",
+        "price": 55000,
+        "description": "Pendrive Kingston 64GB con velocidad de lectura de 50MB/s.",
+        "image": {
+            "alt": "Pendrive Kingston 64GB",
+            "src": "assets/images/products/card/pendrive-kingston.jpg",
+            "banner": "assets/images/products/banner/hyperx.png"
+        }
+    }
+]
